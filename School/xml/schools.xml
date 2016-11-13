@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<schools>
+	<school id='101' name='School 11' locationID='42'>
+		<schoolType>Regular</schoolType>
+		<capacity>500</capacity>
+		<openSince>01.09.1978</openSince>
+		<schoolRating>45</schoolRating>
+	</school>
+	<school id='102' name='Lyceum 1' locationID='42'>
+		<schoolType>Lyceum</schoolType>
+		<capacity>250</capacity>
+		<openSince>01.06.2003</openSince>
+		<schoolRating>89</schoolRating>
+	</school>
+	<school id='103' name='School 25' locationID='58'>
+		<schoolType>Regular</schoolType>
+		<capacity>700</capacity>
+		<openSince>23.02.1956</openSince>
+		<schoolRating>67</schoolRating>
+	</school>
+</schools>
