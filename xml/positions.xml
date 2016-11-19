@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<positions>
+	<position id='9101' name='Director'>
+		<salary>10000</salary>
+	</position>
+	<position id='9102' name='Deputy Director'>
+		<salary>8500</salary>
+	</position>
+	<position id='9103' name='Head Teacher'>
+		<salary>7500</salary>
+	</position>
+</positions>

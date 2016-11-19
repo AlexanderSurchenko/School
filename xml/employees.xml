@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<employees>
+	<employee id='7501' bossID='7502' schoolID='101' name='Brad Dough'>
+		<positionID>9102</positionID>
+		<hireDate>15.10.1985</hireDate>
+		<employeeRating>79</employeeRating>
+		<bonusFee>0.16</bonusFee>
+	</employee>
+	<employee id='7502' schoolID='101' name='Bruce Zales'>
+		<positionID>9101</positionID>
+		<hireDate>01.09.1978</hireDate>
+		<employeeRating>30</employeeRating>
+		<bonusFee>0.00</bonusFee>
+	</employee>
+	<employee id='7503' bossID='7505' schoolID='102' name='Alan Balan'>
+		<positionID>9103</positionID>
+		<hireDate>20.04.2004</hireDate>
+		<employeeRating>88</employeeRating>
+		<bonusFee>0.45</bonusFee>
+	</employee>
+	<employee id='7504' bossID='7505' schoolID='102' name='Calan Dalan'>
+		<positionID>9103</positionID>
+		<hireDate>05.12.2009</hireDate>
+		<employeeRating>91</employeeRating>
+		<bonusFee>0.89</bonusFee>
+	</employee>
+	<employee id='7505' schoolID='102' name='Berny Sanders'>
+		<positionID>9101</positionID>
+		<hireDate>01.06.2012</hireDate>
+		<employeeRating>75</employeeRating>
+		<bonusFee>1.01</bonusFee>
+	</employee>
+	<employee id='7506' schoolID='103' name='Chuck Norris'>
+		<positionID>9101</positionID>
+		<hireDate>23.02.1956</hireDate>
+		<employeeRating>100</employeeRating>
+		<bonusFee>1.50</bonusFee>
+	</employee>
+</employees>

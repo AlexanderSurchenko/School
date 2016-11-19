@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<lessons>
+	<lesson id='6101' name='Language'>
+		<teacherID>7502</teacherID>
+	</lesson>
+	<lesson id='6101' name='Language'>
+		<teacherID>7504</teacherID>
+	</lesson>
+	<lesson id='6101' name='Language'>
+		<teacherID>7506</teacherID>
+	</lesson>
+	<lesson id='6102' name='Basic Math'>
+		<teacherID>7501</teacherID>
+	</lesson>
+	<lesson id='6102' name='Basic Math'>
+		<teacherID>7503</teacherID>
+	</lesson>
+	<lesson id='6102' name='Basic Math'>
+		<teacherID>7505</teacherID>
+	</lesson>
+</lessons>

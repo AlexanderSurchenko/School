@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<locations>
+	<location id='42' name='Soft Square'>
+		<postCode>531787</postCode>
+	</location>
+	<location id='44' name='Cross Lane'>
+		<postCode>459823</postCode>
+	</location>
+	<location id='58' name='Central Avenue'>
+		<postCode>111001</postCode>
+	</location>
+</locations>
