@@ -13,12 +13,18 @@ import java.util.*;
  */
 public class MainClass {
 	public static void main(String args[]) {
-		HashSet<Employees> hashSet = Employees.readEmployees("E:\\Programs"
-				+ "\\NetBeans\\NetBeans 8.1\\Projects\\School"
-				+ "\\xml\\employees.xml");
-		Employees.writeEmployees(hashSet, "E:\\Programs\\NetBeans\\NetBeans 8.1"
-				+ "\\Projects\\School\\xml\\employees2.xml");
-		Employees.listEmployees("E:\\Programs\\NetBeans\\NetBeans 8.1"
-				+ "\\Projects\\School\\xml\\employees.xml");
+		String xmlDocPath = "E:\\Programs\\NetBeans\\NetBeans 8.1"
+				+ "\\Projects\\School\\xml\\employeesc.xml";
+		HashSet<Employees> hashSet = Employees.readEmployees(xmlDocPath);
+		/*Employees.listEmployees("E:\\Programs\\NetBeans\\NetBeans 8.1"
+				+ "\\Projects\\School\\xml\\employees.xml");*/
+		Employees thisOne = null;
+		for (Employees emp: hashSet) {
+			if (emp.getEmployeeID() == 7502) {
+				thisOne = emp;
+			}
+		}
+		thisOne.modifyEmployees(xmlDocPath, "bs", "7503", "102");
+		thisOne.removeEmployees(xmlDocPath);
 	}
 }

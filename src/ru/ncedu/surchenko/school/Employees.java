@@ -10,6 +10,7 @@ import javax.xml.parsers.*;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
@@ -27,6 +28,8 @@ public class Employees {
 	private Calendar hireDate = Calendar.getInstance();
 	private byte employeeRating;
 	private double bonusFee;
+	
+	private static HashSet<Employees> hashSet = new HashSet<>();
 
 	public Employees(int employeeID, int bossID, 
 			int schoolID, String employeeName) {
@@ -46,6 +49,18 @@ public class Employees {
 	}
 	public void setBossID(int bossID) {
 		this.bossID = bossID;
+	}
+	public int getSchoolID() {
+		return schoolID;
+	}
+	public void setSchoolID(int schoolID) {
+		this.schoolID = schoolID;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 	public int getPositionID() {
 		return positionID;
@@ -71,18 +86,6 @@ public class Employees {
 	public void setBonusFee(double bonusFee) {
 		this.bonusFee = bonusFee;
 	}
-	public int getSchoolID() {
-		return schoolID;
-	}
-	public void setSchoolID(int schoolID) {
-		this.schoolID = schoolID;
-	}
-	public String getEmployeeName() {
-		return employeeName;
-	}
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
-	}
 	public static HashSet<Employees> readEmployees(String xmlDocPath) {
 		try {
 			DocumentBuilderFactory dbFactory = 
@@ -96,7 +99,6 @@ public class Employees {
 			}
 			
 			NodeList nList = xmlDoc.getElementsByTagName("employee");
-			HashSet<Employees> hashSet = new HashSet<>();
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -121,16 +123,18 @@ public class Employees {
 							schoolID.equals("") ? 0 : 
 									Integer.parseInt(schoolID),
 							elem.getAttribute("name"));
-					temp.positionID = positionID.equals("") ? 0 : 
-							Integer.parseInt(positionID);
+					temp.setPositionID(positionID.equals("") ? 0 : 
+							Integer.parseInt(positionID));
 					if (!hireDate.equals("")) {
-						temp.hireDate.setTime(new SimpleDateFormat("dd.MM.yyyy")
-							.parse(hireDate));
+						Calendar newHireDate = Calendar.getInstance();
+						newHireDate.setTime(new SimpleDateFormat("dd.MM.yyyy")
+								.parse(hireDate));
+						temp.setHireDate(newHireDate);
 					}
-					temp.employeeRating = employeeRating.equals("") ? 0 :
-							Byte.parseByte(employeeRating);
-					temp.bonusFee = bonusFee.equals("") ? 0 :
-							Double.parseDouble(bonusFee);
+					temp.setEmployeeRating(employeeRating.equals("") ? 0 :
+							Byte.parseByte(employeeRating));
+					temp.setBonusFee(bonusFee.equals("") ? 0 :
+							Double.parseDouble(bonusFee));
 					hashSet.add(temp);
 				}
 			}
@@ -140,92 +144,161 @@ public class Employees {
 		}
 		return null;
 	}
-	public static void writeEmployees(HashSet<Employees> hashSet,
-			String xmlDocPath) {
+	public static void writeEmployees(String xmlDocPath) {
 		try {
-			DocumentBuilderFactory dbFactory = 
-					DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = dbFactory.newDocumentBuilder();
-			Document xmlDoc = builder.newDocument();
-			
-			Element rootElem = xmlDoc.createElement("employees");
-			xmlDoc.appendChild(rootElem);
 			for (Employees temp: hashSet) {
-				Element employee = xmlDoc.createElement("employee");
-				rootElem.appendChild(employee);
-				if (temp.employeeID != 0) {
-					Attr id = xmlDoc.createAttribute("id");
-					id.setValue(String.valueOf(temp.employeeID));
-					employee.setAttributeNode(id);
-				}
-				if (temp.bossID != 0) {
-					Attr bossID = xmlDoc.createAttribute("bossID");
-					bossID.setValue(String.valueOf(temp.bossID));
-					employee.setAttributeNode(bossID);
-				}
-				if (temp.schoolID != 0) {
-					Attr schoolID = xmlDoc.createAttribute("schoolID");
-					schoolID.setValue(String.valueOf(temp.schoolID));
-					employee.setAttributeNode(schoolID);
-				}
-				if (!temp.employeeName.equals("")) {
-					Attr name = xmlDoc.createAttribute("name");
-					name.setValue(temp.employeeName);
-					employee.setAttributeNode(name);
-				}
-				if (temp.positionID != 0) {
-					Element positionID = xmlDoc.createElement("positionID");
-					positionID.appendChild(xmlDoc
-							.createTextNode(String.valueOf(temp.positionID)));
-					employee.appendChild(positionID);
-				}
-				if (temp.hireDate == null) {
-					Element hireDate = xmlDoc.createElement("hireDate");
-					hireDate.appendChild(xmlDoc
-							.createTextNode(new SimpleDateFormat("dd.MM.yyyy")
-							.format(temp.hireDate.getTime())));
-					employee.appendChild(hireDate);
-				}
-				if (temp.employeeRating != 0) {
-					Element employeeRating = 
-							xmlDoc.createElement("employeeRating");
-					employeeRating.appendChild(xmlDoc
-							.createTextNode(String.valueOf(temp.bonusFee)));
-					employee.appendChild(employeeRating);
-				}
-				if (temp.bonusFee != 0) {
-					Element bonusFee = xmlDoc.createElement("bonusFee");
-					bonusFee.appendChild(xmlDoc
-							.createTextNode(String.valueOf(temp.employeeName)));
-					employee.appendChild(bonusFee);
-				}
-				
-				TransformerFactory transformerFactory = 
-						TransformerFactory.newInstance();
-				Transformer transformer = transformerFactory.newTransformer();
-				DOMSource source = new DOMSource(xmlDoc);
-				StreamResult res = new StreamResult(new File(xmlDocPath));
-				transformer.transform(source, res);
+				temp.addEmployees(xmlDocPath);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	public static void listEmployees(String xmlDocPath) {
-		HashSet<Employees> hashSet = Employees.readEmployees(xmlDocPath);
+		hashSet = Employees.readEmployees(xmlDocPath);
 		for (Employees temp: hashSet) {
 			System.out.println("\nemployeeID: " + 
 					String.valueOf(temp.employeeID));
-			System.out.println("bossID: " + String.valueOf(temp.bossID));
-			System.out.println("schoolID " + String.valueOf(temp.schoolID));
-			System.out.println("employeeName: " + temp.employeeName);
+			System.out.println("bossID: " + String.valueOf(temp.getBossID()));
+			System.out.println("schoolID " + 
+					String.valueOf(temp.getSchoolID()));
+			System.out.println("employeeName: " + temp.getEmployeeName());
 			System.out.println("positionID: " + 
-					String.valueOf(temp.positionID));
+					String.valueOf(temp.getPositionID()));
 			System.out.println("hireDate: " + new SimpleDateFormat("dd.MM.yyyy")
-					.format(temp.hireDate.getTime()));
+					.format(temp.getHireDate().getTime()));
 			System.out.println("employeeRating: " + 
-					String.valueOf(temp.employeeRating));
-			System.out.println("bonusFee: " + String.valueOf(temp.bonusFee));
+					String.valueOf(temp.getEmployeeRating()));
+			System.out.println("bonusFee: " + 
+					String.valueOf(temp.getBonusFee()));
 		}
+	}
+	public void addEmployees(String xmlDocPath) {
+		try {
+			DocumentBuilderFactory dbFactory = 
+					DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbFactory.newDocumentBuilder();
+			Document xmlDoc;
+			if (new File(xmlDocPath).exists()) {
+				xmlDoc = builder.parse(xmlDocPath);
+			} else {
+				xmlDoc = builder.newDocument();
+				Element rootElem = xmlDoc.createElement("employees");
+				xmlDoc.appendChild(rootElem);
+			}
+			
+			Element rootElem = xmlDoc.getDocumentElement();
+			Element employee = xmlDoc.createElement("employee");
+			rootElem.appendChild(employee);
+			if (this.getEmployeeID() != 0) {
+				Attr idAttr = xmlDoc.createAttribute("id");
+				idAttr.setValue(String.valueOf(this.getEmployeeID()));
+				employee.setAttributeNode(idAttr);
+			}
+			if (this.getBossID() != 0) {
+				Attr bossIDAttr = xmlDoc.createAttribute("bossID");
+				bossIDAttr.setValue(String.valueOf(this.getBossID()));
+				employee.setAttributeNode(bossIDAttr);
+			}
+			if (this.getSchoolID() != 0) {
+				Attr schoolIDAttr = xmlDoc.createAttribute("schoolID");
+				schoolIDAttr.setValue(String.valueOf(this.getSchoolID()));
+				employee.setAttributeNode(schoolIDAttr);
+			}
+			if (!this.getEmployeeName().equals("")) {
+				Attr nameAttr = xmlDoc.createAttribute("name");
+				nameAttr.setValue(this.getEmployeeName());
+				employee.setAttributeNode(nameAttr);
+			}
+			if (this.getPositionID() != 0) {
+				Element positionIDElem = xmlDoc.createElement("positionID");
+				positionIDElem.appendChild(xmlDoc
+						.createTextNode(String.valueOf(this.getPositionID())));
+				employee.appendChild(positionIDElem);
+			}
+			if (this.getHireDate() != null) {
+				Element hireDateElem = xmlDoc.createElement("hireDate");
+				hireDateElem.appendChild(xmlDoc
+						.createTextNode(new SimpleDateFormat("dd.MM.yyyy")
+						.format(this.getHireDate().getTime())));
+				employee.appendChild(hireDateElem);
+			}
+			if (this.getEmployeeRating() != 0) {
+				Element employeeRatingElem = 
+						xmlDoc.createElement("employeeRating");
+				employeeRatingElem.appendChild(xmlDoc
+						.createTextNode(String
+						.valueOf(this.getEmployeeRating())));
+				employee.appendChild(employeeRatingElem);
+			}
+			Element bonusFeeElem = xmlDoc.createElement("bonusFee");
+			bonusFeeElem.appendChild(xmlDoc
+					.createTextNode(String.valueOf(this.getBonusFee())));
+			employee.appendChild(bonusFeeElem);
+
+			TransformerFactory transformerFactory = 
+					TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(xmlDoc);
+			StreamResult res = new StreamResult(new File(xmlDocPath));
+			transformer.transform(source, res);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void modifyEmployees(String xmlDocPath, String changes, 
+			String... newParams) {
+		hashSet.remove(this);
+		try {
+			Pattern p = Pattern.compile("[bsnphrf]+");
+			Matcher m = p.matcher(changes);
+			if (!m.matches()) {
+				System.err.println("Wrong query");
+			}
+			if (changes.length() != newParams.length) {
+				System.err.println("Wrong number of parameters");
+			}
+			ArrayList<String> paramArray = new ArrayList<>();
+			for (String newParam : newParams) {
+				paramArray.add(newParam);
+			}
+			for (int i = 0; i < changes.length(); i++) {
+				if (changes.charAt(i) == 'b') {
+					this.setBossID(Integer.parseInt(paramArray.get(i)));
+				}
+				if (changes.charAt(i) == 's') {
+					this.setSchoolID(Integer.parseInt(paramArray.get(i)));
+				}
+				if (changes.charAt(i) == 'n') {
+					this.setEmployeeName(paramArray.get(i));
+				}
+				if (changes.charAt(i) == 'p') {
+					this.setPositionID(Integer.parseInt(paramArray.get(i)));
+				}
+				if (changes.charAt(i) == 'h') {
+					Calendar newHireDate = Calendar.getInstance();
+					newHireDate.setTime(new SimpleDateFormat("dd.MM.yyyy")
+							.parse(paramArray.get(i)));
+					this.setHireDate(newHireDate);
+				}
+				if (changes.charAt(i) == 'r') {
+					this.setEmployeeRating(Byte.parseByte(paramArray.get(i)));
+				}
+				if (changes.charAt(i) == 'f') {
+					this.setBonusFee(Double.parseDouble(paramArray.get(i)));
+				}
+			}
+			hashSet.add(this);
+			File xml = new File(xmlDocPath);
+			xml.delete();
+			Employees.writeEmployees(xmlDocPath);
+		} catch (Exception e) {
+			System.out.println("Wrong parameters");
+		}
+	}
+	public void removeEmployees(String xmlDocPath) {
+		hashSet.remove(this);
+		File xml = new File(xmlDocPath);
+		xml.delete();
+		Employees.writeEmployees(xmlDocPath);
 	}
 }
