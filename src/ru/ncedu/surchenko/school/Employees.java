@@ -154,7 +154,6 @@ public class Employees {
 		}
 	}
 	public static void listEmployees(String xmlDocPath) {
-		hashSet = Employees.readEmployees(xmlDocPath);
 		for (Employees temp: hashSet) {
 			System.out.println("\nemployeeID: " + 
 					String.valueOf(temp.employeeID));

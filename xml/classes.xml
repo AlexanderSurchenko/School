@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <classes>
 	<class id='8101' name='1A'>
-		<roomnum>101</roomnum>
+		<roomNum>101</roomNum>
 		<classTeacherID>7503</classTeacherID>
 	</class>
 	<class id='8203' name='2C'>
-		<roomnum>102</roomnum>
+		<roomNum>102</roomNum>
 		<classTeacherID>7504</classTeacherID>
 	</class>
 </classes>
