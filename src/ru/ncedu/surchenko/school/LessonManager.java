@@ -60,10 +60,8 @@ public class LessonManager {
 							.getElementsByTagName("lessonID")
 							.item(0).getTextContent();
 					LessonManager temp = new LessonManager();
-					temp.setStudentID(studentID.equals("") ? 0 : 
-							Integer.parseInt(studentID));
-					temp.setLessonID(lessonID.equals("") ? 0 :
-							Byte.parseByte(lessonID));
+					temp.setStudentID(Integer.parseInt(studentID));
+					temp.setLessonID(Byte.parseByte(lessonID));
 					hashSet.add(temp);
 				}
 			}
@@ -107,19 +105,14 @@ public class LessonManager {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element link = xmlDoc.createElement("link");
 			rootElem.appendChild(link);
-			
-			if (this.getStudentID() != 0) {
-				Element studentIDElem = xmlDoc.createElement("studentID");
-				studentIDElem.appendChild(xmlDoc
-						.createTextNode(String.valueOf(this.getStudentID())));
-				link.appendChild(studentIDElem);
-			}
-			if (this.getLessonID() != 0) {
-				Element lessonIDElem = xmlDoc.createElement("lessonID");
-				lessonIDElem.appendChild(xmlDoc
-						.createTextNode(String.valueOf(this.getLessonID())));
-				link.appendChild(lessonIDElem);
-			}
+			Element studentIDElem = xmlDoc.createElement("studentID");
+			studentIDElem.appendChild(xmlDoc
+					.createTextNode(String.valueOf(this.getStudentID())));
+			link.appendChild(studentIDElem);
+			Element lessonIDElem = xmlDoc.createElement("lessonID");
+			lessonIDElem.appendChild(xmlDoc
+					.createTextNode(String.valueOf(this.getLessonID())));
+			link.appendChild(lessonIDElem);
 
 			TransformerFactory transformerFactory = 
 					TransformerFactory.newInstance();

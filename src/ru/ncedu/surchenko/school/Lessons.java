@@ -68,8 +68,7 @@ public class Lessons {
 					String teacherID = elem
 							.getElementsByTagName("teacherID")
 							.item(0).getTextContent();
-					Lessons temp = new Lessons(
-							id.equals("") ? 0 : Integer.parseInt(id),
+					Lessons temp = new Lessons(Integer.parseInt(id),
 							elem.getAttribute("name"));
 					temp.setTeacherID(teacherID.equals("") ? 0 :
 							Integer.parseInt(teacherID));
@@ -117,11 +116,9 @@ public class Lessons {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element lesson = xmlDoc.createElement("lesson");
 			rootElem.appendChild(lesson);
-			if (this.getLessonID() != 0) {
-				Attr idAttr = xmlDoc.createAttribute("id");
-				idAttr.setValue(String.valueOf(this.getLessonID()));
-				lesson.setAttributeNode(idAttr);
-			}
+			Attr idAttr = xmlDoc.createAttribute("id");
+			idAttr.setValue(String.valueOf(this.getLessonID()));
+			lesson.setAttributeNode(idAttr);
 			if (!this.getLessonName().equals("")) {
 				Attr nameAttr = xmlDoc.createAttribute("name");
 				nameAttr.setValue(this.getLessonName());

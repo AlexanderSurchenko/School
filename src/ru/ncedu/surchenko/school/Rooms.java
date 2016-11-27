@@ -69,8 +69,7 @@ public class Rooms {
 					String capacity = elem
 							.getElementsByTagName("capacity")
 							.item(0).getTextContent();
-					Rooms temp = new Rooms(
-							num.equals("") ? 0 : Integer.parseInt(num),
+					Rooms temp = new Rooms(Integer.parseInt(num),
 							floor.equals("") ? 0 : Byte.parseByte(floor));
 					temp.setCapacity(capacity.equals("") ? 0 :
 							Byte.parseByte(capacity));
@@ -118,11 +117,9 @@ public class Rooms {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element room = xmlDoc.createElement("room");
 			rootElem.appendChild(room);
-			if (this.getRoomNum() != 0) {
-				Attr numAttr = xmlDoc.createAttribute("num");
-				numAttr.setValue(String.valueOf(this.getRoomNum()));
-				room.setAttributeNode(numAttr);
-			}
+			Attr numAttr = xmlDoc.createAttribute("num");
+			numAttr.setValue(String.valueOf(this.getRoomNum()));
+			room.setAttributeNode(numAttr);
 			if (this.getFloor() != 0) {
 				Attr floorAttr = xmlDoc.createAttribute("floor");
 				floorAttr.setValue(String.valueOf(this.getFloor()));

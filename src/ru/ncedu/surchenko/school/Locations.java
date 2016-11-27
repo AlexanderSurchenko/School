@@ -68,8 +68,7 @@ public class Locations {
 					String postCode = elem
 							.getElementsByTagName("postCode")
 							.item(0).getTextContent();
-					Locations temp = new Locations(
-							id.equals("") ? 0 : Integer.parseInt(id),
+					Locations temp = new Locations(Integer.parseInt(id),
 							elem.getAttribute("name"));
 					temp.setPostCode(postCode.equals("") ? 0 :
 							Integer.parseInt(postCode));
@@ -117,11 +116,9 @@ public class Locations {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element location = xmlDoc.createElement("location");
 			rootElem.appendChild(location);
-			if (this.getLocationID() != 0) {
-				Attr idAttr = xmlDoc.createAttribute("id");
-				idAttr.setValue(String.valueOf(this.getLocationID()));
-				location.setAttributeNode(idAttr);
-			}
+			Attr idAttr = xmlDoc.createAttribute("id");
+			idAttr.setValue(String.valueOf(this.getLocationID()));
+			location.setAttributeNode(idAttr);
 			if (!this.getLocationName().equals("")) {
 				Attr nameAttr = xmlDoc.createAttribute("name");
 				nameAttr.setValue(this.getLocationName());

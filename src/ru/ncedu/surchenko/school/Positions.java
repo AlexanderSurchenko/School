@@ -68,8 +68,7 @@ public class Positions {
 					String salary = elem
 							.getElementsByTagName("salary")
 							.item(0).getTextContent();
-					Positions temp = new Positions(
-							id.equals("") ? 0 : Integer.parseInt(id),
+					Positions temp = new Positions(Integer.parseInt(id),
 							elem.getAttribute("name"));
 					temp.setSalary(salary.equals("") ? 0 :
 							Integer.parseInt(salary));
@@ -117,11 +116,9 @@ public class Positions {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element position = xmlDoc.createElement("position");
 			rootElem.appendChild(position);
-			if (this.getPositionID() != 0) {
-				Attr idAttr = xmlDoc.createAttribute("id");
-				idAttr.setValue(String.valueOf(this.getPositionID()));
-				position.setAttributeNode(idAttr);
-			}
+			Attr idAttr = xmlDoc.createAttribute("id");
+			idAttr.setValue(String.valueOf(this.getPositionID()));
+			position.setAttributeNode(idAttr);
 			if (!this.getPositionName().equals("")) {
 				Attr nameAttr = xmlDoc.createAttribute("name");
 				nameAttr.setValue(this.getPositionName());

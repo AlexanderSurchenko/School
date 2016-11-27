@@ -78,8 +78,7 @@ public class Classes {
 					String classTeacherID = elem
 							.getElementsByTagName("classTeacherID")
 							.item(0).getTextContent();
-					Classes temp = new Classes(
-							id.equals("") ? 0 : Integer.parseInt(id),
+					Classes temp = new Classes(Integer.parseInt(id),
 							elem.getAttribute("name"));
 					temp.setRoomNum(roomNum.equals("") ? 0 : 
 							Integer.parseInt(roomNum));
@@ -131,11 +130,9 @@ public class Classes {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element _class = xmlDoc.createElement("class");
 			rootElem.appendChild(_class);
-			if (this.getClassID() != 0) {
-				Attr idAttr = xmlDoc.createAttribute("id");
-				idAttr.setValue(String.valueOf(this.getClassID()));
-				_class.setAttributeNode(idAttr);
-			}
+			Attr idAttr = xmlDoc.createAttribute("id");
+			idAttr.setValue(String.valueOf(this.getClassID()));
+			_class.setAttributeNode(idAttr);
 			if (!this.getClassName().equals("")) {
 				Attr nameAttr = xmlDoc.createAttribute("name");
 				nameAttr.setValue(this.getClassName());

@@ -107,8 +107,7 @@ public class Schools {
 					String schoolRating = elem
 							.getElementsByTagName("schoolRating")
 							.item(0).getTextContent();
-					Schools temp = new Schools(
-							id.equals("") ? 0 : Integer.parseInt(id),
+					Schools temp = new Schools(Integer.parseInt(id),
 							elem.getAttribute("name"),
 							locationID.equals("") ? 0 : 
 									Integer.parseInt(locationID));
@@ -174,11 +173,9 @@ public class Schools {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element school = xmlDoc.createElement("school");
 			rootElem.appendChild(school);
-			if (this.getSchoolID() != 0) {
-				Attr idAttr = xmlDoc.createAttribute("id");
-				idAttr.setValue(String.valueOf(this.getSchoolID()));
-				school.setAttributeNode(idAttr);
-			}
+			Attr idAttr = xmlDoc.createAttribute("id");
+			idAttr.setValue(String.valueOf(this.getSchoolID()));
+			school.setAttributeNode(idAttr);
 			if (!this.getSchoolName().equals("")) {
 				Attr nameAttr = xmlDoc.createAttribute("name");
 				nameAttr.setValue(this.getSchoolName());

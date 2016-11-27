@@ -76,8 +76,7 @@ public class Students {
 					String studentRating = elem
 							.getElementsByTagName("studentRating")
 							.item(0).getTextContent();
-					Students temp = new Students(
-							id.equals("") ? 0 : Integer.parseInt(id),
+					Students temp = new Students(Integer.parseInt(id),
 							elem.getAttribute("name"));
 					temp.setClassID(classID.equals("") ? 0 : 
 							Integer.parseInt(classID));
@@ -129,11 +128,9 @@ public class Students {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element student = xmlDoc.createElement("student");
 			rootElem.appendChild(student);
-			if (this.getStudentID() != 0) {
-				Attr idAttr = xmlDoc.createAttribute("id");
-				idAttr.setValue(String.valueOf(this.getStudentID()));
-				student.setAttributeNode(idAttr);
-			}
+			Attr idAttr = xmlDoc.createAttribute("id");
+			idAttr.setValue(String.valueOf(this.getStudentID()));
+			student.setAttributeNode(idAttr);
 			if (!this.getStudentName().equals("")) {
 				Attr nameAttr = xmlDoc.createAttribute("name");
 				nameAttr.setValue(this.getStudentName());

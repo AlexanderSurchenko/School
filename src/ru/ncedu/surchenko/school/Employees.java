@@ -117,8 +117,7 @@ public class Employees {
 					String bonusFee = elem
 							.getElementsByTagName("bonusFee")
 							.item(0).getTextContent();
-					Employees temp = new Employees(
-							id.equals("") ? 0 : Integer.parseInt(id),
+					Employees temp = new Employees(Integer.parseInt(id),
 							bossID.equals("") ? 0 : Integer.parseInt(bossID),
 							schoolID.equals("") ? 0 : 
 									Integer.parseInt(schoolID),
@@ -188,11 +187,9 @@ public class Employees {
 			Element rootElem = xmlDoc.getDocumentElement();
 			Element employee = xmlDoc.createElement("employee");
 			rootElem.appendChild(employee);
-			if (this.getEmployeeID() != 0) {
-				Attr idAttr = xmlDoc.createAttribute("id");
-				idAttr.setValue(String.valueOf(this.getEmployeeID()));
-				employee.setAttributeNode(idAttr);
-			}
+			Attr idAttr = xmlDoc.createAttribute("id");
+			idAttr.setValue(String.valueOf(this.getEmployeeID()));
+			employee.setAttributeNode(idAttr);
 			if (this.getBossID() != 0) {
 				Attr bossIDAttr = xmlDoc.createAttribute("bossID");
 				bossIDAttr.setValue(String.valueOf(this.getBossID()));
