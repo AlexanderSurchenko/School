@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view>
+        <h:head>
+            <title>Students</title>
+        </h:head>
+        <h:body>
+            <h:form id="st_form">      
+                <h:messages showDetail="true"></h:messages>
+                <table>
+                    <tr>
+                        <td>|   ID</td>
+                        <td>|   Student Name</td>
+                        <td>|   Class ID</td> 
+                        <td>|   Student Rating</td> 
+                        <td>|   Delete Student</td>
+                        <td>|</td>
+                    </tr>                    
+                    <ui:repeat value="#{studentsBean.students}" var="s">
+                        <tr>
+                            <td>| #{s.id}</td>
+                            <td>| #{s.studentName}</td>
+                            <td>| #{s.classID}</td>
+                            <td>| #{s.studentRating}</td>
+                            <td>|
+                                <h:commandButton id="hello" value="Delete" actionListener="#{studentsBean.deleteStudents(s.id)}">
+                                    <f:ajax execute="@this" render=":st_form"/>
+                                </h:commandButton>
+                            </td>
+                            <td>|</td>
+                        </tr>
+                    </ui:repeat>                    
+                </table>
+            </h:form>      
+            <h:form>
+                <h:button value="Home" outcome="index"/>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+

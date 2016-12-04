@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view>
+        <h:head>
+            <title>Schools</title>
+        </h:head>
+        <h:body>
+            <h:form id="s_form">      
+                <h:messages showDetail="true"></h:messages>
+                <table>
+                    <tr>
+                        <td>|   ID</td>
+                        <td>|   School Name</td>
+                        <td>|   Location ID</td>
+                        <td>|   School Type</td>
+                        <td>|   Capacity</td>
+                        <td>|   Open Since</td> 
+                        <td>|   School Rating</td> 
+                        <td>|   Delete School</td>
+                        <td>|</td>
+                    </tr>                    
+                    <ui:repeat value="#{schoolsBean.schools}" var="s">
+                        <tr>
+                            <td>| #{s.id}</td>
+                            <td>| #{s.schoolName}</td>
+                            <td>| #{s.locationID}</td>
+                            <td>| #{s.schoolType}</td>
+                            <td>| #{s.capacity}</td>
+                            <td>| #{s.openSince}</td>
+                            <td>| #{s.schoolRating}</td>
+                            <td>|
+                                <h:commandButton id="hello" value="Delete" actionListener="#{schoolsBean.deleteSchools(s.id)}">
+                                    <f:ajax execute="@this" render=":s_form"/>
+                                </h:commandButton>
+                            </td>
+                            <td>|</td>
+                        </tr>
+                    </ui:repeat>                    
+                </table>
+            </h:form>      
+            <h:form>
+                <h:button value="Home" outcome="index"/>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+

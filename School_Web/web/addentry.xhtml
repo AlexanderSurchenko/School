@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:view>
+        <h:head>
+            <title>Add Entry</title>
+        </h:head>
+        <h:body>     
+            <h:form>
+                <h:button value="Home" outcome="index"/>
+            </h:form>
+            <h:form id="create_class">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    ID: <h:inputText value="#{classesEditBean.id}"/>
+                    Class Name: <h:inputText value="#{classesEditBean.className}"/>
+                    Room ID: <h:inputText value="#{classesEditBean.roomID}"/>
+                    Class Teacher ID: <h:inputText value="#{classesEditBean.classTeacherID}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add Class Entry" actionListener="#{classesBean.createClasses(classesEditBean)}">
+                    <f:ajax execute="@form" render=":cl_form"/>
+                </h:commandButton>                
+            </h:form>
+            <h:outputLabel>---------------------------------</h:outputLabel>
+            <h:form id="create_employee">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    ID: <h:inputText value="#{employeesEditBean.id}"/>
+                    Boss ID: <h:inputText value="#{employeesEditBean.bossID}"/>
+                    School ID: <h:inputText value="#{employeesEditBean.schoolID}"/>
+                    Employee Name: <h:inputText value="#{employeesEditBean.employeeName}"/>
+                    Position ID: <h:inputText value="#{employeesEditBean.positionID}"/>
+                    Hire Date: <h:inputText value="#{employeesEditBean.hireDate}"/>
+                    Employee Rating: <h:inputText value="#{employeesEditBean.employeeRating}"/>
+                    Bonus Fee: <h:inputText value="#{employeesEditBean.bonusFee}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add Employee Entry" actionListener="#{employeesBean.createEmployees(employeesEditBean)}">
+                    <f:ajax execute="@form" render=":emp_form"/>
+                </h:commandButton>                
+            </h:form>
+            <h:outputLabel>---------------------------------</h:outputLabel>
+            <h:form id="create_lessonManager">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    ID: <h:inputText value="#{lessonManagerEditBean.id}"/>
+                    Student ID: <h:inputText value="#{lessonManagerEditBean.studentID}"/>
+                    Lesson ID: <h:inputText value="#{lessonManagerEditBean.lessonID}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add Lesson Manager Entry" actionListener="#{lessonManagerBean.createLink(lessonManagerEditBean)}">
+                    <f:ajax execute="@form" render=":lm_form"/>
+                </h:commandButton>                
+            </h:form>
+            <h:outputLabel>---------------------------------</h:outputLabel>
+            <h:form id="create_lesson">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    ID: <h:inputText value="#{lessonsEditBean.id}"/>
+                    Lesson Name: <h:inputText value="#{lessonsEditBean.lessonName}"/>
+                    Teacher ID: <h:inputText value="#{lessonsEditBean.teacherID}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add Lesson Entry" actionListener="#{lessonsBean.createLessons(lessonsEditBean)}">
+                    <f:ajax execute="@form" render=":l_form"/>
+                </h:commandButton>                
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+
