@@ -27,7 +27,7 @@ public class Schools implements Serializable {
 	private String schoolType;
 	private Integer capacity;
 	@Temporal(javax.persistence.TemporalType.DATE)
-	private Calendar openSince;
+	private Calendar openSince = null;
 	private Byte schoolRating;
 
 	public Long getId() {

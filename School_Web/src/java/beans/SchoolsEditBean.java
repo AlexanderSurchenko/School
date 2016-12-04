@@ -18,7 +18,7 @@ public class SchoolsEditBean implements Serializable {
 	private Long locationID;
 	private String schoolType;
 	private Integer capacity;
-	private Calendar openSince;
+	private Calendar openSince = Calendar.getInstance();
 	private Byte schoolRating;
 
 	public SchoolsEditBean() {
@@ -65,11 +65,7 @@ public class SchoolsEditBean implements Serializable {
 	}
 
 	public String getOpenSince() {
-		if (openSince != null) {
-			return new SimpleDateFormat("dd.MM.yyyy")
-					.format(openSince.getTime());
-		}
-		return null;
+		return new SimpleDateFormat("dd.MM.yyyy").format(openSince.getTime());
 	}
 
 	public void setOpenSince(String openSince) throws ParseException {

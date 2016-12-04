@@ -18,17 +18,18 @@ public class Rooms implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long roomNum;
+	private Long id;
 	private Byte floor;
 	private Byte capacity;
 
-	public Long getRoomNum() {
-		return roomNum;
+	public Long getId() {
+		return id;
 	}
 
-	public void setRoomNum(Long roomNum) {
-		this.roomNum = roomNum;
+	public void setId(Long id) {
+		this.id = id;
 	}
+	
 	public Byte getFloor() {
 		return floor;
 	}
@@ -48,7 +49,7 @@ public class Rooms implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		hash += (roomNum != null ? roomNum.hashCode() : 0);
+		hash += (id != null ? id.hashCode() : 0);
 		return hash;
 	}
 
@@ -60,8 +61,8 @@ public class Rooms implements Serializable {
 			return false;
 		}
 		Rooms other = (Rooms) object;
-		if ((this.roomNum == null && other.roomNum != null) || 
-				(this.roomNum != null && !this.roomNum.equals(other.roomNum))) {
+		if ((this.id == null && other.id != null) || 
+				(this.id != null && !this.id.equals(other.id))) {
 			return false;
 		}
 		return true;
@@ -69,7 +70,7 @@ public class Rooms implements Serializable {
 
 	@Override
 	public String toString() {
-		return "school.Rooms[ roomNum=" + roomNum + " ]";
+		return "school.Rooms[ id=" + id + " ]";
 	}
 	
 }

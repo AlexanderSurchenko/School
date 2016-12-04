@@ -68,6 +68,71 @@ and open the template in the editor.
                     <f:ajax execute="@form" render=":l_form"/>
                 </h:commandButton>                
             </h:form>
+            <h:outputLabel>---------------------------------</h:outputLabel>
+            <h:form id="create_location">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    ID: <h:inputText value="#{locationsEditBean.id}"/>
+                    Location Name: <h:inputText value="#{locationsEditBean.locationName}"/>
+                    Post Code: <h:inputText value="#{locationsEditBean.postCode}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add Location Entry" actionListener="#{locationsBean.createLocations(locationsEditBean)}">
+                    <f:ajax execute="@form" render=":loc_form"/>
+                </h:commandButton>                
+            </h:form>
+            <h:outputLabel>---------------------------------</h:outputLabel>
+            <h:form id="create_position">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    ID: <h:inputText value="#{positionsEditBean.id}"/>
+                    Position Name: <h:inputText value="#{positionsEditBean.positionName}"/>
+                    Salary: <h:inputText value="#{positionsEditBean.salary}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add Position Entry" actionListener="#{positionsBean.createPositions(positionsEditBean)}">
+                    <f:ajax execute="@form" render=":p_form"/>
+                </h:commandButton>                
+            </h:form>
+            <h:outputLabel>---------------------------------</h:outputLabel>
+            <h:form id="create_room">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    Room Number: <h:inputText value="#{roomsEditBean.id}"/>
+                    Floor: <h:inputText value="#{roomsEditBean.floor}"/>
+                    Capacity: <h:inputText value="#{roomsEditBean.capacity}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add Room Entry" actionListener="#{roomsBean.createRooms(roomsEditBean)}">
+                    <f:ajax execute="@form" render=":r_form"/>
+                </h:commandButton>                
+            </h:form>
+            <h:outputLabel>---------------------------------</h:outputLabel>
+            <h:form id="create_school">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    ID: <h:inputText value="#{schoolsEditBean.id}"/>
+                    School Name: <h:inputText value="#{schoolsEditBean.schoolName}"/>
+                    Location ID: <h:inputText value="#{schoolsEditBean.locationID}"/>
+                    School Type: <h:inputText value="#{schoolsEditBean.schoolType}"/>
+                    Capacity: <h:inputText value="#{schoolsEditBean.capacity}"/>
+                    Open Since: <h:inputText value="#{schoolsEditBean.openSince}"/>
+                    School Rating: <h:inputText value="#{schoolsEditBean.schoolRating}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add School Entry" actionListener="#{schoolsBean.createSchools(schoolsEditBean)}">
+                    <f:ajax execute="@form" render=":s_form"/>
+                </h:commandButton>                
+            </h:form>
+            <h:outputLabel>---------------------------------</h:outputLabel>
+            <h:form id="create_student">
+                <h:messages id="m"/>
+                <h:panelGrid columns="2">
+                    ID: <h:inputText value="#{studentsEditBean.id}"/>
+                    Student Name: <h:inputText value="#{studentsEditBean.studentName}"/>
+                    Class ID: <h:inputText value="#{studentsEditBean.classID}"/>
+                    Student Rating: <h:inputText value="#{studentsEditBean.studentRating}"/>
+                </h:panelGrid>
+                <h:commandButton value="Add School Entry" actionListener="#{studentsBean.createStudents(studentsEditBean)}">
+                    <f:ajax execute="@form" render=":st_form"/>
+                </h:commandButton>                
+            </h:form>
         </h:body>
     </f:view>
 </html>

@@ -10,19 +10,19 @@ import javax.faces.bean.ViewScoped;
  */
 @ViewScoped @ManagedBean
 public class RoomsEditBean implements Serializable {
-	private Long roomNum;
+	private Long id;
 	private Byte floor;
 	private Byte capacity;
 
 	public RoomsEditBean() {
 	}
 
-	public Long getRoomNum() {
-		return roomNum;
+	public Long getId() {
+		return id;
 	}
 
-	public void setRoomNum(Long roomNum) {
-		this.roomNum = roomNum;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Byte getFloor() {

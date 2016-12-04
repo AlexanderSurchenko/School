@@ -25,11 +25,11 @@ and open the template in the editor.
                     </tr>                    
                     <ui:repeat value="#{roomsBean.rooms}" var="r">
                         <tr>
-                            <td>| #{r.roomNum}</td>
+                            <td>| #{r.id}</td>
                             <td>| #{r.floor}</td>
                             <td>| #{r.capacity}</td>
                             <td>|
-                                <h:commandButton id="hello" value="Delete" actionListener="#{roomsBean.deleteRooms(r.roomNum)}">
+                                <h:commandButton id="hello" value="Delete" actionListener="#{roomsBean.deleteRooms(r.id)}">
                                     <f:ajax execute="@this" render=":r_form"/>
                                 </h:commandButton>
                             </td>

@@ -26,7 +26,7 @@ public class RoomsBean implements Serializable {
 	UserTransaction utx;
 	
 	public List<Rooms> getRooms() {
-		return em.createQuery("select l from Locations l", Rooms.class)
+		return em.createQuery("select r from Rooms r", Rooms.class)
 				.getResultList();
 	}
 	
@@ -59,13 +59,13 @@ public class RoomsBean implements Serializable {
 	}
 	
 	public void createRooms(RoomsEditBean newR){
-		if (newR == null || newR.getRoomNum() == null) {     
+		if (newR == null || newR.getId() == null) {     
 			return;
 		}
 		try {
 			utx.begin();
 			Rooms r = new Rooms();
-			r.setRoomNum(newR.getRoomNum());
+			r.setId(newR.getId());
 			r.setFloor(newR.getFloor());
 			r.setCapacity(newR.getCapacity());
 			if(r != null) {
